@@ -12,7 +12,7 @@ import com.mihailtarasev.flickrgallery.R
 import com.mihailtarasev.flickrgallery.databinding.ActivityMainBinding
 import com.mihailtarasev.flickrgallery.extension.WrapContentLinearLayoutManager
 import com.mihailtarasev.flickrgallery.extension.displayActivity
-import com.mihailtarasev.flickrgallery.scene.main.model.MainUseCasePhotoModel
+import com.mihailtarasev.flickrgallery.scene.main.model.MainPhotoModel
 import com.mihailtarasev.flickrgallery.scene.main.router.MainRouter
 import com.mihailtarasev.flickrgallery.scene.main.usecase.MainViewModel
 
@@ -102,7 +102,7 @@ class MainActivity : AppCompatActivity(), MainActivityAdapterCallback {
         }
     }
 
-    private fun updateListAdapter(photoList: ArrayList<MainUseCasePhotoModel>) {
+    private fun updateListAdapter(photoList: ArrayList<MainPhotoModel>) {
         mainActivityAdapter.updateList(binding.recyclerview, photoList, oldSizePhotoList, photoList.size)
         oldSizePhotoList = photoList.size
     }

@@ -2,11 +2,11 @@ package com.mihailtarasev.flickrgallery.scene.main.model
 
 import com.mihailtarasev.flickrgallery.scene.main.usecase.MainViewModel
 
-data class MainUseCaseModel(
+data class MainModel(
     var text: String,
     var currentPageNumber: Int,
     var photoPages: Int,
-    var photoList: ArrayList<MainUseCasePhotoModel>,
+    var photoList: ArrayList<MainPhotoModel>,
     var isRefreshing: Boolean
 ) {
     fun updateBy(result: MainNetworkModel) {

@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.mihailtarasev.flickrgallery.R
 import com.mihailtarasev.flickrgallery.databinding.ShowListRawBinding
 import com.mihailtarasev.flickrgallery.extension.cachedImage
-import com.mihailtarasev.flickrgallery.scene.main.model.MainUseCasePhotoModel
+import com.mihailtarasev.flickrgallery.scene.main.model.MainPhotoModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -18,7 +18,7 @@ import kotlinx.coroutines.launch
 
 class MainActivityAdapter(var callback: MainActivityAdapterCallback, var context: Context) :
     RecyclerView.Adapter<MainActivityAdapter.MainActivityAdapterHolder>() {
-    private var flickrItemList = ArrayList<MainUseCasePhotoModel>()
+    private var flickrItemList = ArrayList<MainPhotoModel>()
     private val coroutine = CoroutineScope(Dispatchers.IO)
     private val maxMemory = (Runtime.getRuntime().maxMemory() / 1024)
     private val cacheSize = maxMemory / 8;
@@ -70,7 +70,7 @@ class MainActivityAdapter(var callback: MainActivityAdapterCallback, var context
         val binding = ShowListRawBinding.bind(itemView)
     }
 
-    fun updateList(view: RecyclerView, flickrItemList: ArrayList<MainUseCasePhotoModel>, oldCount: Int, flickrItemListSize: Int) {
+    fun updateList(view: RecyclerView, flickrItemList: ArrayList<MainPhotoModel>, oldCount: Int, flickrItemListSize: Int) {
         this.flickrItemList = flickrItemList
         view.post {
             notifyItemRangeInserted(oldCount, flickrItemListSize)

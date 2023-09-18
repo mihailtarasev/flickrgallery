@@ -5,15 +5,15 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.mihailtarasev.flickrgallery.extension.trigger
 import com.mihailtarasev.flickrgallery.scene.main.model.MainNetworkModel
-import com.mihailtarasev.flickrgallery.scene.main.model.MainUseCaseModel
-import com.mihailtarasev.flickrgallery.scene.main.model.MainUseCasePhotoModel
+import com.mihailtarasev.flickrgallery.scene.main.model.MainModel
+import com.mihailtarasev.flickrgallery.scene.main.model.MainPhotoModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class MainViewModel: ViewModel() {
     private val networkGateway = MainNetworkGatewayImp()
-    private var model = MainUseCaseModel(
+    private var model = MainModel(
         defaultText,
         defaultCurrentPage,
         defaultPhotoPages,
@@ -21,7 +21,7 @@ class MainViewModel: ViewModel() {
         defaultIsRefreshing
     )
     var pageClearedLiveData = MutableLiveData<Void>()
-    var photoListUpdatedLiveData = MutableLiveData<ArrayList<MainUseCasePhotoModel>>()
+    var photoListUpdatedLiveData = MutableLiveData<ArrayList<MainPhotoModel>>()
     var isRefreshingLiveData = MutableLiveData<Boolean>()
     var isAlertFiredLiveData = MutableLiveData<String>()
 
@@ -101,6 +101,6 @@ class MainViewModel: ViewModel() {
         const val defaultCurrentPage = 0
         const val defaultPhotoPages = 1
         const val defaultIsRefreshing = false
-        val defaultPhotoList = ArrayList<MainUseCasePhotoModel>()
+        val defaultPhotoList = ArrayList<MainPhotoModel>()
     }
 }

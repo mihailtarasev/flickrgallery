@@ -5,13 +5,13 @@ import com.mihailtarasev.flickrlib.flickr.model.FlickrResponseModel
 data class MainNetworkModel(
     var photoPageNumber: Int,
     var photoPages: Int,
-    var photoList: ArrayList<MainUseCasePhotoModel>
+    var photoList: ArrayList<MainPhotoModel>
 ) {
     companion object {
         fun create(model: FlickrResponseModel): MainNetworkModel {
-            val flickrPhotoList: List<MainUseCasePhotoModel> = model.photos.photoList.mapNotNull {
+            val flickrPhotoList: List<MainPhotoModel> = model.photos.photoList.mapNotNull {
                 if (!it.smallImageUrl.isNullOrEmpty() && !it.largeImageUrl.isNullOrEmpty()) {
-                    MainUseCasePhotoModel(it.id, it.title, it.smallImageUrl!!, it.largeImageUrl!!)
+                    MainPhotoModel(it.id, it.title, it.smallImageUrl!!, it.largeImageUrl!!)
                 } else {
                     null
                 }
