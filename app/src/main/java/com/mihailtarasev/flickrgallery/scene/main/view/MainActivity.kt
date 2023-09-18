@@ -22,7 +22,6 @@ class MainActivity : AppCompatActivity(), MainActivityAdapterCallback {
     private lateinit var router: MainRouter
     private lateinit var binding: ActivityMainBinding
     private lateinit var mainActivityAdapter: MainActivityAdapter
-    private var oldSizePhotoList = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -128,8 +127,7 @@ class MainActivity : AppCompatActivity(), MainActivityAdapterCallback {
     private fun uploadFirstPage() = viewModel.uploadFirstPage()
 
     private fun updateListAdapter(photoList: ArrayList<MainPhotoModel>) {
-        mainActivityAdapter.updateList(binding.recyclerview, photoList, oldSizePhotoList, photoList.size)
-        oldSizePhotoList = photoList.size
+        mainActivityAdapter.updateList(binding.recyclerview, photoList)
     }
 
     private fun clearListAdapter() {

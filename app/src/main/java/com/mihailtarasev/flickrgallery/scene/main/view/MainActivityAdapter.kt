@@ -18,6 +18,7 @@ import kotlinx.coroutines.launch
 class MainActivityAdapter(var callback: MainActivityAdapterCallback, var placeholder: Drawable) :
     RecyclerView.Adapter<MainActivityAdapter.MainActivityAdapterHolder>() {
     private var flickrItemList = ArrayList<MainPhotoModel>()
+    private var oldSizeItemList = 0
     private val coroutine = CoroutineScope(Dispatchers.IO)
     private val maxMemory = (Runtime.getRuntime().maxMemory() / 1024)
     private val cacheSize = maxMemory / 8;
@@ -68,10 +69,12 @@ class MainActivityAdapter(var callback: MainActivityAdapterCallback, var placeho
         val binding = ShowListRawBinding.bind(itemView)
     }
 
-    fun updateList(view: RecyclerView, flickrItemList: ArrayList<MainPhotoModel>, oldCount: Int, flickrItemListSize: Int) {
+    fun updateList(view: RecyclerView, flickrItemList: ArrayList<MainPhotoModel>) {
+        oldSizeItemList = this.flickrItemList.size
+        val flickrItemListSize = flickrItemList.size
         this.flickrItemList = flickrItemList
         view.post {
-            notifyItemRangeInserted(oldCount, flickrItemListSize)
+            notifyItemRangeInserted(oldSizeItemList, flickrItemListSize)
         }
     }
 
