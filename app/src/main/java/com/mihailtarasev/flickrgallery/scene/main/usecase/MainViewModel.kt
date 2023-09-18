@@ -43,22 +43,25 @@ class MainViewModel: ViewModel() {
     }
 
     fun uploadNextAvailablePage() {
-            if (model.isAvailableNextPage()) {
-                emitIsRefreshing(true)
-                    viewModelScope.launch(Dispatchers.IO) {
-                        try {
-                            val networkGatewayModel = getNextPhotoPage()
-                            model.updateBy(networkGatewayModel)
-                            withContext(Dispatchers.Main) {
-                                emitPhotoListUpdatedToObserver()
-                            }
-                        } catch (exception: Exception) {
-                            withContext(Dispatchers.Main) {
-                                emitIsAlertFired(exception.toString())
-                            }
-                        }
+        if (model.isAvailableNextPage()) {
+            emitIsRefreshing(true)
+            viewModelScope.launch(Dispatchers.IO) {
+                try {
+                    val networkGatewayModel = getNextPhotoPage()
+                    model.updateBy(networkGatewayModel)
+                    withContext(Dispatchers.Main) {
+                        emitPhotoListUpdatedToObserver()
                     }
-                emitIsRefreshing(false)
+                } catch (exception: Exception) {
+                    withContext(Dispatchers.Main) {
+                        emitIsAlertFired(exception.toString())
+                    }
+                } finally {
+                    withContext(Dispatchers.Main) {
+                        emitIsRefreshing(false)
+                    }
+                }
+            }
         }
     }
 

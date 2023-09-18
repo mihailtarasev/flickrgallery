@@ -1,7 +1,7 @@
 package com.mihailtarasev.flickrgallery.scene.main.view
 
-import android.content.Context
 import android.graphics.Bitmap
+import android.graphics.drawable.Drawable
 import android.util.LruCache
 import android.view.LayoutInflater
 import android.view.View
@@ -15,8 +15,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-
-class MainActivityAdapter(var callback: MainActivityAdapterCallback, var context: Context) :
+class MainActivityAdapter(var callback: MainActivityAdapterCallback, var placeholder: Drawable) :
     RecyclerView.Adapter<MainActivityAdapter.MainActivityAdapterHolder>() {
     private var flickrItemList = ArrayList<MainPhotoModel>()
     private val coroutine = CoroutineScope(Dispatchers.IO)
@@ -37,13 +36,12 @@ class MainActivityAdapter(var callback: MainActivityAdapterCallback, var context
     }
 
     private fun setThumbnailPlaceholder(holder: MainActivityAdapterHolder) {
-        val placeholder = context.getDrawable(R.drawable.ic_launcher_foreground)
         holder.binding.thumbnail.setImageDrawable(placeholder)
     }
 
     private fun setThumbnailImage(holder: MainActivityAdapterHolder, position: Int) {
         val smallImageUrl = flickrItemList[position].smallImageUrl
-        coroutine.launch(Dispatchers.IO) {
+        coroutine.launch {
             val image = memoryCache.cachedImage(smallImageUrl)
             holder.itemView.post {
                 holder.binding.thumbnail.setImageBitmap(image)

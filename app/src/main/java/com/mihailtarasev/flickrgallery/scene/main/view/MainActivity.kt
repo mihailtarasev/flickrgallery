@@ -5,6 +5,7 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
+import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -83,7 +84,8 @@ class MainActivity : AppCompatActivity(), MainActivityAdapterCallback {
     }
 
     private fun setupRecyclerviewAdapter() {
-        mainActivityAdapter = MainActivityAdapter(this, applicationContext)
+        val placeholder = ContextCompat.getDrawable(this, R.drawable.ic_launcher_foreground)!!
+        mainActivityAdapter = MainActivityAdapter(this, placeholder)
         binding.recyclerview.adapter = mainActivityAdapter
     }
 
