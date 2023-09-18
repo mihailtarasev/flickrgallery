@@ -28,6 +28,7 @@ class MainActivity : AppCompatActivity(), MainActivityAdapterCallback {
         configure()
         setupViews()
         setupViewModelObserver()
+        uploadFirstPage()
     }
 
     private fun configure() {
@@ -42,12 +43,19 @@ class MainActivity : AppCompatActivity(), MainActivityAdapterCallback {
     }
 
     private fun setupSearchView() {
+        setupSearchViewFocusChangeListener()
+        setupSearchViewSetTextListener()
+    }
+
+    private fun setupSearchViewFocusChangeListener() {
         binding.searchView.setOnQueryTextFocusChangeListener { _ , hasFocus ->
             if (!hasFocus) {
                 viewModel.updateNotFilteredClearedPage()
             }
         }
+    }
 
+    private fun setupSearchViewSetTextListener() {
         binding.searchView.setOnQueryTextListener(object: SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(p0: String?): Boolean {
                 viewModel.updateClearedPage()
@@ -69,20 +77,33 @@ class MainActivity : AppCompatActivity(), MainActivityAdapterCallback {
 
     private fun setupRecyclerview() {
         binding.recyclerview.setHasFixedSize(true)
-        val rotation = this.displayActivity().rotation
-        binding.recyclerview.layoutManager = WrapContentLinearLayoutManager(applicationContext, rotation, portraitCountRows, landscapeCountRows)
+        setupRecyclerviewAdapter()
+        setupRecyclerviewLayoutManager()
+        setupRecyclerviewOnScrollListener()
+    }
+
+    private fun setupRecyclerviewAdapter() {
         mainActivityAdapter = MainActivityAdapter(this, applicationContext)
         binding.recyclerview.adapter = mainActivityAdapter
+    }
+
+    private fun setupRecyclerviewLayoutManager() {
+        val rotation = this.displayActivity().rotation
+        binding.recyclerview.layoutManager = WrapContentLinearLayoutManager(applicationContext, rotation, portraitCountRows, landscapeCountRows)
+    }
+
+    private fun setupRecyclerviewOnScrollListener() {
         binding.recyclerview.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
                 if (!binding.recyclerview.canScrollVertically(1)) {
-                    viewModel.uploadNextAvailablePage()
+                    uploadNextAvailablePage()
                 }
             }
         })
-        viewModel.uploadFirstPage()
     }
+
+    private fun uploadNextAvailablePage() = viewModel.uploadNextAvailablePage()
 
     private fun setupViewModelObserver() {
         viewModel.pageClearedLiveData.observe(this) {
@@ -101,6 +122,8 @@ class MainActivity : AppCompatActivity(), MainActivityAdapterCallback {
             Toast.makeText(this, it, Toast.LENGTH_LONG).show()
         }
     }
+
+    private fun uploadFirstPage() = viewModel.uploadFirstPage()
 
     private fun updateListAdapter(photoList: ArrayList<MainPhotoModel>) {
         mainActivityAdapter.updateList(binding.recyclerview, photoList, oldSizePhotoList, photoList.size)
