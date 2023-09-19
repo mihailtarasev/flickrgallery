@@ -90,7 +90,7 @@ class MainActivity : AppCompatActivity(), MainActivityAdapterCallback {
 
     private fun setupRecyclerviewLayoutManager() {
         val rotation = this.displayActivity().rotation
-        binding.recyclerview.layoutManager = WrapContentLinearLayoutManager(applicationContext, rotation, portraitCountRows, landscapeCountRows)
+        binding.recyclerview.layoutManager = WrapContentLinearLayoutManager(this, rotation, portraitCountRows, landscapeCountRows)
     }
 
     private fun setupRecyclerviewOnScrollListener() {
