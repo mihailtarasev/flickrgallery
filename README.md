@@ -2,11 +2,11 @@
 
 Android Kotlin project
 
-![Alt text](Main.png) ![Alt text](Detail.png)
+![Alt text](Main.jpg) ![Alt text](Detail.jpg)
 
 ## Features
 
-Uploading from the Retrofit 2 network, URL connection<br/>
+Uploading from the Retrofit 2 network or URL connection<br/>
 Json Data Parser<br/>
 ViewModel Architecture<br/>
 Remote Flickr API Server<br/>
@@ -17,7 +17,7 @@ Binding<br/>
 
 ## Особенности
 
-Подгрузка из сети Retrofit 2, URL connection<br/>
+Подгрузка из сети Retrofit 2 или URL connection<br/>
 Парсер данных Json<br/>
 Архитектура ViewModel<br/>
 Удаленный сервер Flickr API<br/>
