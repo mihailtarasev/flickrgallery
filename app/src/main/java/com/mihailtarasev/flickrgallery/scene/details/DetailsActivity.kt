@@ -3,9 +3,7 @@ package com.mihailtarasev.flickrgallery.scene.details
 import android.graphics.BitmapFactory
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.lifecycleScope
-import com.mihailtarasev.flickrgallery.R
 import com.mihailtarasev.flickrgallery.databinding.ActivityDetailsBinding
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -17,15 +15,17 @@ class DetailsActivity: AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_details)
+        configure()
         getIntentExtra()
         displayImage()
     }
-
+    private fun configure() {
+        binding = ActivityDetailsBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+    }
     private fun getIntentExtra() {
         screenImageUrl = intent.getStringExtra(extraScreenImageUrl) ?: defaultScreenImageUrl
     }
-
     private fun displayImage() {
         lifecycleScope.launch(Dispatchers.IO) {
             val stream = URL(screenImageUrl).openStream()
@@ -35,7 +35,6 @@ class DetailsActivity: AppCompatActivity() {
             }
         }
     }
-
     companion object {
         const val extraScreenImageUrl = "ExtraDetailsActivityScreenImageUrl"
         const val defaultScreenImageUrl = "https://loremflickr.com/320/240"

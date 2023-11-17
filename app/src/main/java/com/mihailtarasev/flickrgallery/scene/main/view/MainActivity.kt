@@ -30,23 +30,20 @@ class MainActivity : AppCompatActivity(), MainActivityAdapterCallback {
         setupViewModelObserver()
         uploadFirstPage()
     }
-
     private fun configure() {
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         router = MainRouter(this)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
     }
-
     private fun setupViews() {
         setupSearchView()
         setupRecyclerview()
         setupRefreshControl()
     }
-
     private fun setupSearchView() {
         setupSearchViewFocusChangeListener()
         setupSearchViewSetTextListener()
     }
-
     private fun setupSearchViewFocusChangeListener() {
         binding.searchView.setOnQueryTextFocusChangeListener { _ , hasFocus ->
             if (!hasFocus) {
@@ -54,7 +51,6 @@ class MainActivity : AppCompatActivity(), MainActivityAdapterCallback {
             }
         }
     }
-
     private fun setupSearchViewSetTextListener() {
         binding.searchView.setOnQueryTextListener(object: SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(p0: String?): Boolean {
@@ -67,32 +63,27 @@ class MainActivity : AppCompatActivity(), MainActivityAdapterCallback {
             }
         })
     }
-
     private fun setupRefreshControl() {
         binding.swipeRefreshLayout.setOnRefreshListener {
             binding.swipeRefreshLayout.isRefreshing = false
             viewModel.updateClearedPage()
         }
     }
-
     private fun setupRecyclerview() {
         binding.recyclerview.setHasFixedSize(true)
         setupRecyclerviewAdapter()
         setupRecyclerviewLayoutManager()
         setupRecyclerviewOnScrollListener()
     }
-
     private fun setupRecyclerviewAdapter() {
         val placeholder = ContextCompat.getDrawable(this, R.drawable.ic_launcher_foreground)!!
         mainActivityAdapter = MainActivityAdapter(this, placeholder)
         binding.recyclerview.adapter = mainActivityAdapter
     }
-
     private fun setupRecyclerviewLayoutManager() {
         val rotation = this.displayActivity().rotation
         binding.recyclerview.layoutManager = WrapContentLinearLayoutManager(this, rotation, portraitCountRows, landscapeCountRows)
     }
-
     private fun setupRecyclerviewOnScrollListener() {
         binding.recyclerview.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
@@ -103,7 +94,6 @@ class MainActivity : AppCompatActivity(), MainActivityAdapterCallback {
             }
         })
     }
-
     private fun uploadNextAvailablePage() = viewModel.uploadNextAvailablePage()
 
     private fun setupViewModelObserver() {
@@ -129,11 +119,9 @@ class MainActivity : AppCompatActivity(), MainActivityAdapterCallback {
     private fun updateListAdapter(photoList: ArrayList<MainPhotoModel>) {
         mainActivityAdapter.updateList(binding.recyclerview, photoList)
     }
-
     private fun clearListAdapter() {
         mainActivityAdapter.clearList()
     }
-
     override fun onMainActivityAdapterItemCLick(imageUrl: String) {
         router.startDetailsActivity(imageUrl)
     }

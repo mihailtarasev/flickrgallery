@@ -4,11 +4,15 @@ plugins {
     id 'com.android.library' version '7.3.1' apply false
     id 'org.jetbrains.kotlin.android' version '1.7.20' apply false
 }
+apply from: 'versions.gradle'
 
 ext.compileSdkVersionName = 33
 ext.minSdkVersionId = 21
 ext.targetSdkVersionId = 33
 ext.buildVersionCode = 1
-ext.buildVersionName = "1.0"
+ext.buildVersionName = "1.2"
 ext.flickrlibVersionCode = 1
-ext.flickrlibVersionName = "1.0"
+ext.flickrlibVersionName = "1.2"
+ext.sourceCompatibilityVersion = JavaVersion.VERSION_1_8
+ext.targetCompatibilityVersion = JavaVersion.VERSION_1_8
+ext.jvmTargetVersion = JavaVersion.VERSION_1_8

@@ -30,18 +30,15 @@ class MainViewModel: ViewModel() {
             uploadNextAvailablePage()
         }
     }
-
     fun updateNotFilteredClearedPage() {
         if(isNotFiltered()) {
             updateClearedPage()
         }
     }
-
     fun updateClearedPage() {
         clearPage()
         uploadNextAvailablePage()
     }
-
     fun uploadNextAvailablePage() {
         if (model.isAvailableNextPage()) {
             emitIsRefreshing(true)
@@ -64,7 +61,6 @@ class MainViewModel: ViewModel() {
             }
         }
     }
-
     fun setFilterWithDefault(text: String?, default: String = defaultText) { model.text = text ?: default }
 
     private suspend fun getNextPhotoPage(): MainNetworkModel {
@@ -72,12 +68,10 @@ class MainViewModel: ViewModel() {
         val text = model.text.ifEmpty { defaultText }
         return networkGateway.getPhotoPageRequest(text, defaultPerPage, nextPageNumber)
     }
-
     private fun clearPage() {
         model.clearPage()
         emitPageClearedEventToObserver()
     }
-
     private fun isNotFiltered() = model.text.isEmpty()
 
     private fun isNextPageWillFirst() = model.photoList.isEmpty()
@@ -85,15 +79,12 @@ class MainViewModel: ViewModel() {
     private fun emitIsAlertFired(text: String) {
         isAlertFiredLiveData.value = text
     }
-
     private fun emitIsRefreshing(isRefreshing: Boolean) {
         isRefreshingLiveData.value = isRefreshing
     }
-
     private fun emitPhotoListUpdatedToObserver() {
         photoListUpdatedLiveData.value = model.photoList
     }
-
     private fun emitPageClearedEventToObserver() {
         pageClearedLiveData.trigger()
     }
