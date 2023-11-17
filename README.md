@@ -6,22 +6,22 @@ Android Kotlin project
 
 ## Features
 
-Uploading from the Retrofit 2 network or URL connection<br/>
-Json Data Parser<br/>
-ViewModel Architecture<br/>
-Remote Flickr API Server<br/>
-Caching of LruCache images<br/>
+Uploading from the network (Retrofit 2, URLConnection)<br/>
+Data Parser (Gson)<br/>
+Architecture (ViewModel)<br/>
+Remote Server (Flickr API)<br/>
+Image Caching (LruCache)<br/>
 Endless list<br/>
 Search<br/>
 Binding<br/>
 
 ## Особенности
 
-Подгрузка из сети Retrofit 2 или URL connection<br/>
-Парсер данных Json<br/>
-Архитектура ViewModel<br/>
-Удаленный сервер Flickr API<br/>
-Кэширование изображений LruCache<br/>
+Подгрузка из сети (Retrofit 2, URLconnection)<br/>
+Парсер данных (Gson)<br/>
+Архитектура (ViewModel)<br/>
+Удаленный сервер (Flickr API)<br/>
+Кэширование изображений (LruCache)<br/>
 Бесконечный список<br/>
 Поиск<br/>
 Биндинг<br/>
